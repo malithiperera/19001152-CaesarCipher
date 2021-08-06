@@ -3,8 +3,7 @@ package CiserCipher
 object CiserCipher {
   val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-//  val E: (Char, Int, String) => Char = (c: Char, key: Int, a: String) =>
-//    Predef.augmentString(a)(i = (a.indexOf(c.toUpper) + key) % a.length)
+
 val E=(c:Char,key:Int,a:String)=> a((a.indexOf(c.toUpper)+key)%a.size)
 
 
