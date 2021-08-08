@@ -1,6 +1,6 @@
 package CiserCipher
 
-object CiserCipher {
+object CiserCipher extends App {
   val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
