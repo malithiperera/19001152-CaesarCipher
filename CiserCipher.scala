@@ -1,14 +1,13 @@
-package CiserCipher
+package FunctionScala
 
-object CiserCipher extends App {
+object CaesarCipher {
   val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
   val E=(c:Char,key:Int,a:String)=> a((a.indexOf(c.toUpper)+key)%a.size)
 
 
-  val D=(c:Char,key:Int,a:String)=>
-    a((a.indexOf(c.toUpper)-key)%a.size)
+  val D=(c:Char,key:Int,a:String)=> a(if((a.indexOf(c.toUpper)-key)%a.size >=0) (a.indexOf(c.toUpper)-key)%a.size else a.size+(a.indexOf(c.toUpper)-key)%a.size)
 
   val cipher: ((Char, Int, String) => Char, String, Int, String) => String = (algo: (Char, Int, String) =>
     Char, s: String, key: Int, a: String) =>
@@ -17,40 +16,42 @@ object CiserCipher extends App {
 
 
   def main(args: Array[String]): Unit = {
-    println("Select Choice:")
-    println("1:Encrpt")
-    println("2.Decrpyt")
 
-    val choice = scala.io.StdIn.readInt()
-    if(choice==1)
+    println("Press 1 to encrypt ")
+    println("Press 2 to decrpyt ")
+
+    val num = scala.io.StdIn.readInt()
+    if(num==1)
     {
-      println("Enter the key value:")
-      val b = scala.io.StdIn.readInt()
       println("Enter the string to Encrypt")
-      val s=scala.io.StdIn.readLine()
-      val ct: String = cipher(E, s, b, alphabet)
+      val str=scala.io.StdIn.readLine()
+      println("Enter the key value:")
+      val key = scala.io.StdIn.readInt()
+      val ct: String = cipher(E, str, key, alphabet)
+
       println(" String after encrypted: " + ct)
-      val pt: String = cipher(D, ct, b, alphabet)
+      val pt: String = cipher(D, ct, key, alphabet)
       println(" String again after decrypted: "+ pt)
     }
 
-    else if(choice==2){
-     println("Enter the key value:")
-      val d = scala.io.StdIn.readInt()
-     println("Enter the string to Decrypt")
-   val dec=scala.io.StdIn.readLine()
+    else if(num==2){
+      println("Enter the key value:")
+      val key = scala.io.StdIn.readInt()
+      println("Enter the string to Decrypt")
+      val str=scala.io.StdIn.readLine()
 
-      val pt: String = cipher(D, dec, d, alphabet)
-     
+      val pt: String = cipher(D, str, key, alphabet)
 
-     println(" String again after decrypted: "+ pt)
+
+      println(" String again after decrypted: "+ pt)
     }
 
     else{
-      println("Invalid Choice")
+      println("Invalid Option")
     }
 
 
 
   }
+
 }
